@@ -15,8 +15,6 @@ When reading such and similar messages, many get the distinct impression that so
 
 ## Task
 
-We invite you to participate in our ongoing challenge on the detection of clickbait posts in social media.
-
 The task of the challenge is to develop a classifier that rates how click baiting a social media post is. For each social media post, the content of the post itself as well as the main content of the linked target web page are provided as JSON-Objects in our Datasets.
 
 ##Data
@@ -25,8 +23,7 @@ The task of the challenge is to develop a classifier that rates how click baitin
 
 The Webis Clickbait Corpus 2017 comprises a total of 38,517 Twitter posts from 27 major US news publishers. In addition to the posts, information about the articles linked in the posts are included. The posts had been published between November 2016 and June 2017. To avoid publisher and topical biases, a maximum of ten posts per day and publisher were sampled. All posts were annotated on a 4-point scale [not click baiting (0.0), slightly click baiting (0.33), considerably click baiting (0.66), heavily click baiting (1.0)] by five annotators from Amazon Mechanical Turk. A total of 9,276 posts are considered clickbait by the majority of annotators. In terms of its size, this corpus outranges the Webis Clickbait Corpus 2016 by one order of magnitude. The corpus is divided into two logical parts, a training and a test dataset.
 
-The dataset itself is hosted on Zenodo.
-Input Format
+### Input Format
 
 Every data point consists of a JSON-object that looks like this:
 	
@@ -44,19 +41,15 @@ Every data point consists of a JSON-object that looks like this:
    	...],
  	"targetCaptions": ["(Flikr/USDA)"]
  	}  
-	
-	
 
-## Output Format
+### Output Format
 
 Classifiers have to output a clickbait score in the range [0,1], where a value of 1.0 denotes that a post is heavily click baiting.
 
-	
       	{"id": "608999590243741697", "clickbaitScore": 1.0}
-        
-        
 
 #Evaluation
+
 ##Crowdsourcing
 
 Performance is measured against a crowd-sourced test set. The posts in the training and test sets have been judged on a 4-point scale [0, 0.3, 0.66, 1] by at least five annotators.
@@ -71,18 +64,8 @@ Performance is measured against a crowd-sourced test set. The posts in the train
    	"truthClass" : "clickbait"
 	}
         
-	
-
 ##Software Evaluation
 As primary evaluation metric, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. For informational purposes, we compute further evaluation metrics such as the Median Absolute Error (MedAE), the F1-Score (F1) with respect to the truth class, as well as the runtime of the classification software. For your convenience, you can download the official python evaluation program.
-Software Submission
-
-We use the Evaluation as a Service platform TIRA to evaluate the performance of your classifier. TIRA requires that you deploy your classifier as a program that can be executed with two arguments for input and output directories via a command line call.
-
-    1. Use our paper template to outline your approach and elaborate on its variants.
-    2. Develop and train a clickbait classifier on the training data.
-    3. Deploy the trained classifier on the TIRA virtual machine assigned to you.
-    4. Use tira.io to self-evaluate the deployed classifier on the test set by running an evaluator on the output of your run.
 
 ## Results
 
@@ -124,11 +107,17 @@ clickbait17-baseline 	0.043 	0.552 	0.758 	0.434 	0.832 	00:37:34 	Code/Paper
 
 ## Publications
 Matthias Hagen, Maik Fröbe, Artur Jurk, and Martin Potthast. Clickbait Spoiling via Question Answering and Passage Retrieval. In 60th Annual Meeting of the Association for Computational Linguistics (ACL 2022), May 2022. Association for Computational Linguistics. [arxiv] [bib] [code] [copylink] [data]
+
 Lidor Ivan, Shira Dvir Gvirsman, Mario Haim, and Martin Potthast. Don't Take the Bait: Users' Engagement with Clickbait and Its Effect on Editorial Considerations. In 71st Annual International Communication Association Conference (ICA 2021), May 2021. [bib] [copylink] [video]
+
 Martin Potthast, Tim Gollub, Matthias Hagen, and Benno Stein. The Clickbait Challenge 2017: Towards a Regression Model for Clickbait Strength. CoRR, abs/1812.10847, December 2018. [bib] [copylink] [event] [publisher] [research]
+
 Martin Potthast, Tim Gollub, Kristof Komlossy, Sebastian Schuster, Matti Wiegmann, Erika Patricia Garces Fernandez, Matthias Hagen, and Benno Stein. Crowdsourcing a Large Corpus of Clickbait on Twitter. In Emily M. Bender, Leon Derczynski, and Pierre Isabelle, editors, 27th International Conference on Computational Linguistics (COLING 2018), pages 1498-1507, August 2018. The COLING 2018 Organizing Committee. [bib] [copylink] [data] [publisher] [research]
+
 Jiani Qu, Anny Marleen Hißbach, Tim Gollub, and Martin Potthast. Towards Crowdsourcing Clickbait Labels for YouTube Videos. In Yiling Chen and Gabrielle Kazai, editors, 6th AAAI Conference on Human Computation and Crowdsourcing (HCOMP 2018), July 2018. [bib] [copylink] [data] [research]
+
 Matti Wiegmann, Michael Völske, Benno Stein, Matthias Hagen, and Martin Potthast. Heuristic Feature Selection for Clickbait Detection. CoRR, abs/1802.01191, February 2018. [bib] [copylink] [publisher]
+
 Martin Potthast, Sebastian Köpsel, Benno Stein, and Matthias Hagen. Clickbait Detection. In Nicola Ferro et al., editors, Advances in Information Retrieval. 38th European Conference on IR Research (ECIR 2016), volume 9626 of Lecture Notes in Computer Science, pages 810-817, March 2016. Springer. [award] [bib] [copylink] [data] [doi] [poster] [research] [slides]
 
 ## Github for the challenge
