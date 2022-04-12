@@ -16,3 +16,11 @@ When reading such and similar messages, many get the distinct impression that so
 ## Github for the challenge
 Here is a the Github "page" for the challenge : https://github.com/clickbait-challenge .
 
+### An article on the subject
+Predicting Clickbait Strength in Online Social Media
+https://www.researchgate.net/publication/348342948_Predicting_Clickbait_Strength_in_Online_Social_Media
+Vijayasaradhi Indurthi, Bakhtiyar Syed, Manish Gupta, Vasudeva Varma
+IIIT Hyderabad, India
+{vijaya.saradhi,syed.b}@research.iiit.ac.in
+{manish.gupta,vv}@iiit.ac.in
+
