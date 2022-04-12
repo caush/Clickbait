@@ -3,7 +3,9 @@ Variations around the Clickbait Challenge
 
 Information for the challenge can be find (avril 2022) here : https://webis.de/events/clickbait-challenge/index.html .
 
-## Synopsis from the page
+We copy paste information valuable to our project here.
+
+## Synopsis
 
 Clickbait refers to a certain kind of web content advertisement that is designed to entice its readers into clicking an accompanying link. Typically, it is spread on social media in the form of short teaser messages that may read like the following examples:
 
@@ -22,6 +24,8 @@ The task of the challenge is to develop a classifier that rates how click baitin
 ###Dataset
 
 The Webis Clickbait Corpus 2017 comprises a total of 38,517 Twitter posts from 27 major US news publishers. In addition to the posts, information about the articles linked in the posts are included. The posts had been published between November 2016 and June 2017. To avoid publisher and topical biases, a maximum of ten posts per day and publisher were sampled. All posts were annotated on a 4-point scale [not click baiting (0.0), slightly click baiting (0.33), considerably click baiting (0.66), heavily click baiting (1.0)] by five annotators from Amazon Mechanical Turk. A total of 9,276 posts are considered clickbait by the majority of annotators. In terms of its size, this corpus outranges the Webis Clickbait Corpus 2016 by one order of magnitude. The corpus is divided into two logical parts, a training and a test dataset.
+
+https://zenodo.org/record/5530410
 
 ### Input Format
 
@@ -48,9 +52,9 @@ Classifiers have to output a clickbait score in the range [0,1], where a value o
 
       	{"id": "608999590243741697", "clickbaitScore": 1.0}
 
-#Evaluation
+##Evaluation
 
-##Crowdsourcing
+###Crowdsourcing
 
 Performance is measured against a crowd-sourced test set. The posts in the training and test sets have been judged on a 4-point scale [0, 0.3, 0.66, 1] by at least five annotators.
 
@@ -64,31 +68,31 @@ Performance is measured against a crowd-sourced test set. The posts in the train
    	"truthClass" : "clickbait"
 	}
         
-##Software Evaluation
+###Software Evaluation
 As primary evaluation metric, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. For informational purposes, we compute further evaluation metrics such as the Median Absolute Error (MedAE), the F1-Score (F1) with respect to the truth class, as well as the runtime of the classification software. For your convenience, you can download the official python evaluation program.
 
 ## Results
 
 The following list presents the current performances achieved by the participants. As primary evaluation measure, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. For further metrics, see the full result table on tira.io. If provided, paper and code of the submissions are linked in each row.
-team 	results
-	MSE 	F1 	Precision 	Recall 	Accuracy 	Runtime 	Code/Paper
-goldfish 	0.024 	0.741 	0.739 	0.742 	0.876 	16:20:21 	Code/Paper
-monkfish 	0.026 	0.694 	0.785 	0.622 	0.870 	03:41:35 	Code/Paper
-dartfish 	0.027 	0.706 	0.733 	0.681 	0.865 	00:47:07 	Code/Paper
-torpedo19 	0.03 	0.677 	0.755 	0.614 	0.861 	00:52:44 	Code/Paper
-albacore 	0.031 	0.67 	0.731 	0.62 	0.855 	00:01:10 	Code/Paper
-blobfish 	0.032 	0.646 	0.738 	0.574 	0.85 	00:03:22 	Code/Paper
-zingel 	0.033 	0.683 	0.719 	0.65 	0.856 	00:03:27 	Code/Paper
-anchovy 	0.034 	0.68 	0.717 	0.645 	0.855 	00:07:20 	Code/Paper
-ray 	0.034 	0.684 	0.691 	0.677 	0.851 	00:29:28 	Code/Paper
-icarfish 	0.035 	0.621 	0.768 	0.522 	0.849 	01:02:57 	Code/Paper
-emperor 	0.036 	0.641 	0.714 	0.581 	0.845 	00:04:03 	Code/Paper
-carpetshark 	0.036 	0.638 	0.728 	0.568 	0.847 	00:08:05 	Code/Paper
-electriceel 	0.038 	0.588 	0.727 	0.493 	0.835 	01:04:54 	Code/Paper
-arowana 	0.039 	0.656 	0.659 	0.654 	0.837 	00:35:24 	Code/Paper
-pineapplefish 	0.041 	0.631 	0.642 	0.621 	0.827 	00:54:28 	Code/Paper
-whitebait 	0.043 	0.565 	0.7 	0.474 	0.826 	00:04:31 	Code/Paper
-clickbait17-baseline 	0.043 	0.552 	0.758 	0.434 	0.832 	00:37:34 	Code/Paper
+team 			results
+			MSE 	F1 	Precision 	Recall 	Accuracy 	Runtime
+goldfish 		0.024 	0.741 	0.739 		0.742 	0.876 		16:20:21
+monkfish 		0.026 	0.694 	0.785 		0.622 	0.870 		03:41:35
+dartfish 		0.027 	0.706 	0.733 		0.681 	0.865 		00:47:07
+torpedo19 		0.03 	0.677 	0.755 		0.614 	0.861 		00:52:44
+albacore 		0.031 	0.67 	0.731 		0.62 	0.855 		00:01:10
+blobfish 		0.032 	0.646 	0.738 		0.574 	0.85 		00:03:22
+zingel 			0.033 	0.683 	0.719 		0.65 	0.856		00:03:27
+anchovy 		0.034 	0.68 	0.717 		0.645 	0.855 		00:07:20
+ray 			0.034 	0.684 	0.691 		0.677 	0.851		00:29:28
+icarfish 		0.035 	0.621 	0.768 		0.522 	0.849 		01:02:57
+emperor 		0.036 	0.641 	0.714 		0.581 	0.845 		00:04:03
+carpetshark 		0.036 	0.638 	0.728 		0.568 	0.847 		00:08:05
+electriceel 		0.038 	0.588 	0.727 		0.493 	0.835 		01:04:54
+arowana 		0.039 	0.656 	0.659 		0.654 	0.837 		00:35:24
+pineapplefish 		0.041 	0.631 	0.642 		0.621 	0.827 		00:54:28
+whitebait 		0.043 	0.565 	0.7 		0.474 	0.826 		00:04:31
+clickbait17-baseline 	0.043 	0.552 	0.758 		0.434 	0.832 		00:37:34
 
 
 ## Related Work
