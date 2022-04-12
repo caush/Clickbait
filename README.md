@@ -13,17 +13,6 @@ Clickbait refers to a certain kind of web content advertisement that is designed
 
 When reading such and similar messages, many get the distinct impression that something is odd about them; something unnamed is referred to, some emotional reaction is promised, some lack of knowledge is ascribed, some authority is claimed. Content publishers of all kinds discovered clickbait as an effective tool to draw attention to their websites. The level of attention captured by a website determines the prize of displaying ads there, whereas attention is measured in terms of unique page impressions, usually caused by clicking on a link that points to a given page (often abbreviated as “clicks”). Therefore, a clickbait’s target link alongside its teaser message usually redirects to the sender’s website if the reader is afar, or else to another page on the same site. The content found at the linked page often encourages the reader to share it, suggesting clickbait for a default message and thus spreading it virally. Clickbait on social media has been on the rise in recent years, and even some news publishers have adopted this technique. These developments have caused general concern among many outspoken bloggers, since clickbait threatens to clog up social media channels, and since it violates journalistic codes of ethics.
 
-## Github for the challenge
-Here is a the Github "page" for the challenge : https://github.com/clickbait-challenge .
-
-### An article on the subject
-Predicting Clickbait Strength in Online Social Media
-https://www.researchgate.net/publication/348342948_Predicting_Clickbait_Strength_in_Online_Social_Media
-Vijayasaradhi Indurthi, Bakhtiyar Syed, Manish Gupta, Vasudeva Varma
-IIIT Hyderabad, India
-{vijaya.saradhi,syed.b}@research.iiit.ac.in
-{manish.gupta,vv}@iiit.ac.in
-
 ## Task
 
 We invite you to participate in our ongoing challenge on the detection of clickbait posts in social media.
@@ -31,6 +20,7 @@ We invite you to participate in our ongoing challenge on the detection of clickb
 The task of the challenge is to develop a classifier that rates how click baiting a social media post is. For each social media post, the content of the post itself as well as the main content of the linked target web page are provided as JSON-Objects in our Datasets.
 
 ##Data
+
 ###Dataset
 
 The Webis Clickbait Corpus 2017 comprises a total of 38,517 Twitter posts from 27 major US news publishers. In addition to the posts, information about the articles linked in the posts are included. The posts had been published between November 2016 and June 2017. To avoid publisher and topical biases, a maximum of ten posts per day and publisher were sampled. All posts were annotated on a 4-point scale [not click baiting (0.0), slightly click baiting (0.33), considerably click baiting (0.66), heavily click baiting (1.0)] by five annotators from Amazon Mechanical Turk. A total of 9,276 posts are considered clickbait by the majority of annotators. In terms of its size, this corpus outranges the Webis Clickbait Corpus 2016 by one order of magnitude. The corpus is divided into two logical parts, a training and a test dataset.
@@ -140,3 +130,14 @@ Martin Potthast, Tim Gollub, Kristof Komlossy, Sebastian Schuster, Matti Wiegman
 Jiani Qu, Anny Marleen Hißbach, Tim Gollub, and Martin Potthast. Towards Crowdsourcing Clickbait Labels for YouTube Videos. In Yiling Chen and Gabrielle Kazai, editors, 6th AAAI Conference on Human Computation and Crowdsourcing (HCOMP 2018), July 2018. [bib] [copylink] [data] [research]
 Matti Wiegmann, Michael Völske, Benno Stein, Matthias Hagen, and Martin Potthast. Heuristic Feature Selection for Clickbait Detection. CoRR, abs/1802.01191, February 2018. [bib] [copylink] [publisher]
 Martin Potthast, Sebastian Köpsel, Benno Stein, and Matthias Hagen. Clickbait Detection. In Nicola Ferro et al., editors, Advances in Information Retrieval. 38th European Conference on IR Research (ECIR 2016), volume 9626 of Lecture Notes in Computer Science, pages 810-817, March 2016. Springer. [award] [bib] [copylink] [data] [doi] [poster] [research] [slides]
+
+## Github for the challenge
+Here is a the Github "page" for the challenge : https://github.com/clickbait-challenge .
+
+### An article on the subject
+Predicting Clickbait Strength in Online Social Media
+https://www.researchgate.net/publication/348342948_Predicting_Clickbait_Strength_in_Online_Social_Media
+Vijayasaradhi Indurthi, Bakhtiyar Syed, Manish Gupta, Vasudeva Varma
+IIIT Hyderabad, India
+{vijaya.saradhi,syed.b}@research.iiit.ac.in
+{manish.gupta,vv}@iiit.ac.in
