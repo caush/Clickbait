@@ -1,7 +1,10 @@
 # Variations around the Clickbait Challenge
 
-The clickbait challenge has been proposed by the [Webis Group](https://webis.de/). Description of the challenge can be find in the [Webis.de](https://webis.de/events/clickbait-challenge/index.html) website. There is also a [Github page for the challenge](https://github.com/clickbait-challenge) .
-We copy paste (avril 2022) parts of the information for the sake of simplicity. Our solution uses [Huggingface Transformers](https://huggingface.co/)
+The clickbait challenge has been proposed by a [group of researchers](https://webis.de/). Description of the challenge can be foud in the [Webis.de](https://webis.de/events/clickbait-challenge/index.html) website. There is also a [Github page for the challenge](https://github.com/clickbait-challenge).
+
+As we work on clickbait issues using [Huggingface Transformers](https://huggingface.co/), we found this challenge and decided to make a try.
+
+We copy paste (avril 2022) parts of the information from the [Webis.de](https://webis.de/events/clickbait-challenge/index.html) website here for the sake of simplicity. We complement this information with references and comments on our code. 
 
 ## Synopsis
 
@@ -13,18 +16,23 @@ Clickbait refers to a certain kind of web content advertisement that is designed
 
 When reading such and similar messages, many get the distinct impression that something is odd about them; something unnamed is referred to, some emotional reaction is promised, some lack of knowledge is ascribed, some authority is claimed. Content publishers of all kinds discovered clickbait as an effective tool to draw attention to their websites. The level of attention captured by a website determines the prize of displaying ads there, whereas attention is measured in terms of unique page impressions, usually caused by clicking on a link that points to a given page (often abbreviated as “clicks”). Therefore, a clickbait’s target link alongside its teaser message usually redirects to the sender’s website if the reader is afar, or else to another page on the same site. The content found at the linked page often encourages the reader to share it, suggesting clickbait for a default message and thus spreading it virally. Clickbait on social media has been on the rise in recent years, and even some news publishers have adopted this technique.
 
-## Task
-
-The task of the challenge was to develop a algorithm that rates how click baiting a social media post is.
+The task of the challenge is to develop a algorithm that rates how click baiting a social media post is.
 
 ## Data
- For each social media post, the content of the post itself as well as the main content of the linked target web page are provided as JSON-Objects.
 
-### Dataset
-The Webis Clickbait Corpus 2017 comprises a total of 38,517 Twitter posts from 27 major US news publishers. In addition to the posts, information about the articles linked in the posts are included. All posts were annotated on a 4-point scale [not click baiting (0.0), slightly click baiting (0.33), considerably click baiting (0.66), heavily click baiting (1.0)] by five annotators from Amazon Mechanical Turk. A total of 9,276 posts are considered clickbait by the majority of annotators. [The corpus is divided into two logical parts, a training and a test dataset](https://zenodo.org/record/5530410). A simplified version of both sets, without the related information, is provided in the Data/Original folder.
+### Original
+For each social media post, the content of the post itself as well as the main content of the linked target web page are provided as JSON-Objects.
 
-### Input
-Every data point consists of a JSON-object that looks like this:
+The Webis Clickbait Corpus 2017 comprises a total of 38,517 Twitter posts from 27 major US news publishers. In addition to the posts, information about the articles linked in the posts are included. All posts were annotated on a 4-point scale [not click baiting (0.0), slightly click baiting (0.33), considerably click baiting (0.66), heavily click baiting (1.0)] by five annotators from Amazon Mechanical Turk. A total of 9,276 posts are considered clickbait by the majority of annotators. [The corpus is divided into two logical parts, a training and a test dataset](https://zenodo.org/record/5530410).
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5530410.svg)](https://doi.org/10.5281/zenodo.5530410)
+
+A simplified version of both sets, without the related information, is provided in the Data/Original folder.
+
+#### Train Dataset (clickbait17-train-170630)
+
+##### Instances
+The structure of the JSONL file is the following :
 
 	{
  	"id": "608999590243741697",
@@ -39,10 +47,14 @@ Every data point consists of a JSON-object that looks like this:
    		"A new study, published this Wednesday by ...", 
    		...],
  	"targetCaptions": ["(Flikr/USDA)"]
- 	} 
+ 	}
 
-### Output
-The posts in the training and test sets have been judged on a 4-point scale [0, 0.3, 0.66, 1] by at least five annotators.
+We extract the [instances.jsonl](Data/Original/clickbait17-train-170630/instances.jsonl) file from the "clickbait17-train-170630.zip" file. There are 19538 entries. We do not keep the media files.
+
+Note that some of the entries do not have postText. We will remove them for the training.
+
+##### Truth
+The posts in the training and test sets have been judged on a 4-point scale (0, 0.3, 0.66, 1) by at least five annotators.
 	
 	{
 	"id": "608999590243741697", 
@@ -52,9 +64,20 @@ The posts in the training and test sets have been judged on a 4-point scale [0, 
    	"truthMode"  : 1.0,
    	"truthClass" : "clickbait"
 	}
-        
-## Results
-As primary evaluation metric, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. For informational purposes, we compute further evaluation metrics such as the Median Absolute Error (MedAE), the F1-Score (F1) with respect to the truth class, as well as the runtime of the classification software.
+
+We extract the [truth.jsonl](Data/Original/clickbait17-train-170630/truth.jsonl) file from the "clickbait17-train-170630.zip" file. There are 19538 entries. From this entries, 4761 are clickbaits (`truthClass == "clickbait"` or `truthMean > 0.5`).
+
+#### Test Datasets (clickbait17-test-170720)
+We use the test files with parsimony (in fact 1 time) to not overfit the models.
+
+##### Instances
+We extract the [instances.jsonl](Data/Original/clickbait17-test-170720/instances.jsonl) file from the "clickbait17-test-170720.zip" file. There are 19538 entries. We do not keep the media files. Note that some of the entries dont have postText. We will remove them for the testing.
+
+##### Truth
+We extract the [truth.jsonl](Data/Original/clickbait17-test-170720/truth.jsonl) file from the "clickbait17-test-170720.zip" file. There are 18979 entries. From this entries, 4515 are clickbaits (`truthClass == "clickbait"` or `truthMean > 0.5`).
+
+## Results (Clickbait)
+As primary evaluation metric, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. Further evaluation metrics such as the F1-Score (F1) are computed with respect to the truth class, as well as the runtime of the classification software.
 
 The following list presents the current performances achieved by the participants. As primary evaluation measure, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. 
 
@@ -77,28 +100,11 @@ The following list presents the current performances achieved by the participant
 |pineapplefish 	| 0.041 | 0.631 |	0.642 	| 0.621 |	0.827 |	00:54:28|
 |whitebait 	 	| 0.043 | 0.565 |	0.7 	| 0.474 |	0.826 |	00:04:31|
 
-## Publications
-Matthias Hagen, Maik Fröbe, Artur Jurk, and Martin Potthast. [Clickbait Spoiling via Question Answering and Passage Retrieval](https://webis.de/downloads/publications/papers/hagen_2022a.pdf). In 60th Annual Meeting of the Association for Computational Linguistics (ACL 2022), May 2022. Association for Computational Linguistics.
-
-Lidor Ivan, Shira Dvir Gvirsman, Mario Haim, and Martin Potthast. [Don't Take the Bait: Users' Engagement with Clickbait and Its Effect on Editorial Considerations](https://webis.de/downloads/publications/papers/ivan_2021.pdf). In 71st Annual International Communication Association Conference (ICA 2021), May 2021.
-
-Martin Potthast, Tim Gollub, Matthias Hagen, and Benno Stein. [The Clickbait Challenge 2017: Towards a Regression Model for Clickbait Strength](https://webis.de/downloads/publications/papers/potthast_2018w.pdf). CoRR, abs/1812.10847, December 2018.
-
-Martin Potthast, Tim Gollub, Kristof Komlossy, Sebastian Schuster, Matti Wiegmann, Erika Patricia Garces Fernandez, Matthias Hagen, and Benno Stein. [Crowdsourcing a Large Corpus of Clickbait on Twitter](https://webis.de/downloads/publications/papers/potthast_2018j.pdf). In Emily M. Bender, Leon Derczynski, and Pierre Isabelle, editors, 27th International Conference on Computational Linguistics (COLING 2018), pages 1498-1507, August 2018. The COLING 2018 Organizing Committee.
-
-Jiani Qu, Anny Marleen Hißbach, Tim Gollub, and Martin Potthast. [Towards Crowdsourcing Clickbait Labels for YouTube Videos](https://webis.de/downloads/publications/papers/qu_2018.pdf). In Yiling Chen and Gabrielle Kazai, editors, 6th AAAI Conference on Human Computation and Crowdsourcing (HCOMP 2018), July 2018.
-
-Matti Wiegmann, Michael Völske, Benno Stein, Matthias Hagen, and Martin Potthast. [Heuristic Feature Selection for Clickbait Detection](https://webis.de/downloads/publications/papers/wiegmann_2018.pdf). CoRR, abs/1802.01191, February 2018.
-
-Martin Potthast, Sebastian Köpsel, Benno Stein, and Matthias Hagen. [Clickbait Detection](https://webis.de/downloads/publications/papers/potthast_2016b.pdf). In Nicola Ferro et al., editors, Advances in Information Retrieval. 38th European Conference on IR Research (ECIR 2016), volume 9626 of Lecture Notes in Computer Science, pages 810-817, March 2016. Springer.
-
-Indurthi, Vijayasaradhi & Syed, Bakhtiyar & Gupta, Manish & Varma, Vasudeva. (2020). [Predicting Clickbait Strength in Online Social Media](https://www.researchgate.net/publication/348342948_Predicting_Clickbait_Strength_in_Online_Social_Media). 4835-4846. 10.18653/v1/2020.coling-main.425.
-
-## OriginalToCurated
+### OriginalToCurated
 This notebook takes ...
 
 
-## CuratedToModel
+### CuratedToModel
 This notebook takes ...
 
 A model is saved in the Clickbait folder and in Huggingface.
@@ -107,3 +113,23 @@ A model is saved in the Clickbait folder and in Huggingface.
 
 
 ### Huggingface model
+
+## Publications
+From the [Webis.de](https://webis.de/events/clickbait-challenge/index.html) site. In last publication, authors use similare methods that ours (but two years before). We do not read the other publications :-( .
+
+- Matthias Hagen, Maik Fröbe, Artur Jurk, and Martin Potthast. [Clickbait Spoiling via Question Answering and Passage Retrieval](https://webis.de/downloads/publications/papers/hagen_2022a.pdf). In 60th Annual Meeting of the Association for Computational Linguistics (ACL 2022), May 2022. Association for Computational Linguistics.
+
+ - Lidor Ivan, Shira Dvir Gvirsman, Mario Haim, and Martin Potthast. [Don't Take the Bait: Users' Engagement with Clickbait and Its Effect on Editorial Considerations](https://webis.de/downloads/publications/papers/ivan_2021.pdf). In 71st Annual International Communication Association Conference (ICA 2021), May 2021.
+
+ - Martin Potthast, Tim Gollub, Matthias Hagen, and Benno Stein. [The Clickbait Challenge 2017: Towards a Regression Model for Clickbait Strength](https://webis.de/downloads/publications/papers/potthast_2018w.pdf). CoRR, abs/1812.10847, December 2018.
+
+ - Martin Potthast, Tim Gollub, Kristof Komlossy, Sebastian Schuster, Matti Wiegmann, Erika Patricia Garces Fernandez, Matthias Hagen, and Benno Stein. [Crowdsourcing a Large Corpus of Clickbait on Twitter](https://webis.de/downloads/publications/papers/potthast_2018j.pdf). In Emily M. Bender, Leon Derczynski, and Pierre Isabelle, editors, 27th International Conference on Computational Linguistics (COLING 2018), pages 1498-1507, August 2018. The COLING 2018 Organizing Committee.
+
+ - Jiani Qu, Anny Marleen Hißbach, Tim Gollub, and Martin Potthast. [Towards Crowdsourcing Clickbait Labels for YouTube Videos](https://webis.de/downloads/publications/papers/qu_2018.pdf). In Yiling Chen and Gabrielle Kazai, editors, 6th AAAI Conference on Human Computation and Crowdsourcing (HCOMP 2018), July 2018.
+
+ - Matti Wiegmann, Michael Völske, Benno Stein, Matthias Hagen, and Martin Potthast. [Heuristic Feature Selection for Clickbait Detection](https://webis.de/downloads/publications/papers/wiegmann_2018.pdf). CoRR, abs/1802.01191, February 2018.
+
+ - Martin Potthast, Sebastian Köpsel, Benno Stein, and Matthias Hagen. [Clickbait Detection](https://webis.de/downloads/publications/papers/potthast_2016b.pdf). In Nicola Ferro et al., editors, Advances in Information Retrieval. 38th European Conference on IR Research (ECIR 2016), volume 9626 of Lecture Notes in Computer Science, pages 810-817, March 2016. Springer.
+
+ - Indurthi Vijayasaradhi, Syed Bakhtiyar, Gupta Manish, Varma Vasudeva. [Predicting Clickbait Strength in Online Social Media](https://www.researchgate.net/publication/348342948_Predicting_Clickbait_Strength_in_Online_Social_Media). 4835-4846. 10.18653/v1/2020.coling-main.425 (2020).
+
