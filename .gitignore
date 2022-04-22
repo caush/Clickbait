@@ -1,5 +1,13 @@
-# media files
+# media files somewhere in the Data folder
 media/
+# Tests I am doing
+Draft/
+# Dont save the models (for the while)
+Models/
+# Dont save arrow files
+*.arrow
+# Dont save VSCode files
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
