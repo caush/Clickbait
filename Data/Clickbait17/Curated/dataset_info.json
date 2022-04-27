@@ -22,6 +22,11 @@
       "id": null,
       "_type": "Value"
     },
+    "fromDataset": {
+      "dtype": "string",
+      "id": null,
+      "_type": "Value"
+    },
     "truthMean": {
       "dtype": "float64",
       "id": null,
@@ -43,5 +48,5 @@
     "truthMean"
   ],
   "task_templates": null,
-  "version": "0.3.0"
+  "version": "0.6.0"
 }
