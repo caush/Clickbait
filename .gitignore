@@ -4,7 +4,7 @@ media/
 Draft/
 # Dont save the models (for the while)
 Models/
-Caush/
+Caush/Clickbait*
 # Dont save arrow files
 *.arrow
 # Dont save VSCode files
