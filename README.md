@@ -20,7 +20,7 @@ Data for the challenge can be found in the [zenado.org](https://zenodo.org) webs
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5530410.svg)](https://doi.org/10.5281/zenodo.5530410)
 
 ### Original
-For the challenge the corpus was divided into training and "secret" test datasets. After the challenge another training set was provided in the [zenado.org](https://zenodo.org) website, and the test set was not secret anymore. The sets are composed of a instance.jsonl and a truth.jsonl files. The structure of the instances.jsonl files is the following :
+For the challenge the corpus was divided into training and "secret" test datasets. After the challenge another training set was provided in the [zenado.org](https://zenodo.org) website, and the test set was not secret anymore. The sets are composed of an instance.jsonl and a truth.jsonl files. The structure of the instances.jsonl files is the following :
 
 	{
  	"id": "608999590243741697",
@@ -78,7 +78,7 @@ We extract the [truth.jsonl](Data/Original/clickbait17-test-170720/truth.jsonl) 
 ## Results (Clickbait)
 As primary evaluation metric, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. Further evaluation metrics such as the F1-Score (F1) are computed with respect to the truth class, as well as the runtime of the classification software.
 
-The following list presents the current performances achieved by the participants. As primary evaluation measure, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. Our result is 0,026 for the MSE metric. We do not compute the other metrics. We try not to cheat using unknown data at the time oh the challenge. We do not use k-fold cross validation techniques.
+The following list presents the current performances achieved by the participants. As primary evaluation measure, Mean Squared Error (MSE) with respect to the mean judgments of the annotators is used. Our result is 0,026 for the MSE metric. We do not compute the other metrics. We try not to cheat using unknown data at the time of the challenge. We do not use k-fold cross validation techniques.
 
 | team 			| MSE 	| F1	| Precision | Recall| Accuracy| Runtime |
 |----- 			|-----	|---	|-----------|-------|---------|-------- |
